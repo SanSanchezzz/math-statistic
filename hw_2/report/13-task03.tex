@@ -1,0 +1,56 @@
+\section*{Задача \textnumero3\\\textit{Метод максимального правдоподобия}}
+
+\subsection*{Условие}
+\sloppy С использованием метода максимального правдоподобия для случайной выборки $\vec{X} = (X_1,\dots,X_n)$ из генеральной совокупности $X$ найти точечные оценки параметров заданного закона распределения:
+\begin{equation*}
+    f_X(x) = \frac{4\theta^3}{\sqrt[]{\pi}} x^2 e^{-\theta^2 x^2}
+\end{equation*}
+А так же вычислить выборочные значения найденных оценок для выборки:
+\begin{equation*}
+    \vec{x}_5 = (1, 4, 7, 2, 3)
+\end{equation*}
+
+\subsection*{Решение}
+Рассматриваемая случайная величина является непрерывной. Следовательно, функция правдоподобия принимает вид:
+\begin{equation*}
+    \mathcal{L}({x}_1, ..., {x}_n, \theta) = f_X(x_1, \theta) \cdot ... \cdot f_X(x_n, \theta) = 
+    \bigg(\frac{4 \theta^3}{\sqrt{\pi}}\bigg)^n \cdot e^{-\theta^2 \sum\limits_{i=1}^n{x_i^2}} \cdot (x_1^2 \cdot ... \cdot x_n^2)
+    %28224 (\frac{4\theta^3}{\sqrt{\pi}})^5 e^{-79\theta^2}
+\end{equation*}
+
+Для упрощения вычислений, проинтегрируем полученную функцию:
+\begin{eqnarray*}
+    \ln \mathcal{L} = n \ln \frac{4 \theta^3}{\sqrt{\pi}} - \theta^2 \sum\limits_{i=1}^n{x_i^2} + \ln(x_1^2 \cdot ... \cdot x_n^2) = \\
+    n \ln 4 + 3n \ln \theta - \frac{n}{2} \ln{\pi} - \theta^2 \sum\limits_{i=1}^n{x_i^2} + \ln(x_1^2 \cdot ... \cdot x_n^2)
+\end{eqnarray*}
+
+Зная необходимое условие экстремума $\frac{\partial \ln L}{\partial \theta} = 0$, найдем искомый параметр:
+\begin{equation*}
+    \frac{\partial \ln L}{\partial \theta} = \frac{3n}{\theta} - 2\theta \sum\limits_{i=1}^n{x_i^2} = 0 \Rightarrow \frac{3n - 2 \theta^2 \sum\limits_{i=1}^n{x_i^2}}{\theta} = 0 \Rightarrow 
+    \hat{\theta} = \theta = \pm \sqrt{\frac{3n}{2 \sum\limits_{i = 1}^n{x_i^2}}}
+\end{equation*}
+
+Зная достаточное условие экстремума $\frac{\partial^2 \ln \mathcal{L}}{\partial \theta^2} \neq 0$, проверим полученное значение:
+\begin{equation*}
+    \frac{\partial^2 \ln \mathcal{L}}{\partial \theta^2} =
+    -\frac{3n}{\theta^2} - 2 \sum\limits_{i=1}^n{x_i^2} \Bigg|_{\theta=\hat{\theta}} =
+    -4 \sum\limits_{i=1}^n{x_i^2} =
+    \begin{vmatrix}
+        \overline{x}^2 \geq 0
+    \end{vmatrix}
+    \Rightarrow -4 \overline{x}^2 \leq 0
+\end{equation*}
+
+Вычислим выборочные значения найденных оценок для выборки\\
+$\vec{x_5} = (1, 4, 7, 2, 3)$
+
+\begin{equation*}
+    \hat{\theta} = \pm \sqrt{\frac{3 \cdot 5}{2 \cdot \frac{1^2 + 4^2 + 7^2 + 2^2 +3^2}{5}}} = \pm 0.69
+\end{equation*}
+
+\textbf{Ответ:} 
+\begin{enumerate}
+    \item $\hat\theta = \pm \sqrt{\frac{3n}{2 \sum\limits_{i = 1}^n{x_i^2}}}$
+    \item $\hat{\theta} = \pm 0.69$
+
+\end{enumerate}
